@@ -1,4 +1,4 @@
-// Set Matrix zeroes
+//1 Set Matrix zeroes
 
     void setZeroes(vector<vector<int>>& matrix) {
         int n = matrix.size(), m =matrix[0].size(), col0=1;
@@ -26,7 +26,7 @@
 
     }
 
-// Pascals Triangle
+//2 Pascals Triangle
 
     vector<vector<int>> generatePascal(int numRows) {
         vector<vector<int>> ans(numRows);
@@ -44,7 +44,7 @@
         return ans;
     }
 
-//Next Permutation
+//3 Next Permutation
 
     void nextPermutation(vector<int>& nums) {
         int n = nums.size(), k, l;
@@ -64,7 +64,7 @@
         }
     }
 
-// Maximum subarray sum (Kadane's Algo)
+//4 Maximum subarray sum (Kadane's Algo)
 
     int maxSubArray(vector<int>& nums) {
         int n=nums.size(), sum = 0, maxSum = nums[0];
@@ -78,7 +78,7 @@
         return maxSum;
     }
 
-// Sort an array of 0s, 1s and 2s
+//5 Sort an array of 0s, 1s and 2s
 
     void sortColors(vector<int>& nums) {
         int n=nums.size(), low=0, mid=0, high=n-1;
@@ -96,7 +96,7 @@
         }
     }
 
-// Best time to buy and sell stock
+//6 Best time to buy and sell stock
 
     int maxProfit(vector<int>& prices) {
         

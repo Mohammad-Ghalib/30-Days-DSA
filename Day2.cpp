@@ -1,4 +1,4 @@
-// Rotate matrix
+//1 Rotate matrix
 
     void rotate(vector<vector<int>>& matrix) {
         int n = matrix.size();
@@ -16,7 +16,7 @@
         }
     }
 
-// Merge intervals
+//2 Merge intervals
 
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
         
@@ -39,7 +39,7 @@
         return mergedIntervals;
     }
 
-// Merge sorted array
+//3 Merge sorted array
 
     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
         int i=m-1, j=n-1, k=m+n-1;
@@ -58,7 +58,7 @@
         }
     }
 
-// Find duplicate number
+//4 Find duplicate number
 
     int findDuplicate(vector<int>& nums) {
         
@@ -79,7 +79,7 @@
         return fast;
     }
 
-// Repeat and missing number
+//5 Repeat and missing number
 
     int *findTwoElement(int *arr, int n) {
         int xor1=0;
@@ -117,7 +117,7 @@
         return ans;
     }
 
-// Count inversions using merge sort
+//6 Count inversions using merge sort
 
     long long int merge( vector<long long>&nums, long long low , long long mid, long long high){
         long long  count =0,k=0;
