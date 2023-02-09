@@ -185,3 +185,154 @@
         return ans;
     }
 
+//6 Implement min stack
+
+class MinStack {
+public:
+
+    stack<pair<int,int>> st;
+    int mini;
+    MinStack() {
+        mini = INT_MAX;
+    }
+    
+    void push(int val) {
+        if(st.empty()) mini = min(mini, val);
+        else mini = min(st.top().second, val);
+        st.push({val,mini});
+    }
+    
+    void pop() {
+        st.pop();
+        if(!st.empty()) mini = st.top().second;
+        else mini = INT_MAX;
+    }
+    
+    int top() {
+        return st.top().first;
+    }
+    
+    int getMin() {
+        return st.top().second;
+    }
+};
+
+//7 Rotten oranges
+
+    int orangesRotting(vector<vector<int>>& grid) {
+        
+        int fresh=0, rotten=0, ans=0;
+        int n = grid.size();
+        int m = grid[0].size();
+
+        for(int i=0; i<n; i++){
+            for(int j=0; j<m; j++){
+                if(grid[i][j] == 1) fresh++;
+                if(grid[i][j] == 2) rotten++;
+            }
+        }
+
+        int tot = rotten + fresh;
+
+        while(rotten < tot){
+
+            vector<vector<int>> vis(n, vector<int>(m,0));
+            int currRot = rotten;
+
+            for(int i=0; i<n; i++){
+                for(int j=0; j<m; j++){
+                    if(!vis[i][j] && grid[i][j] == 2){
+                        bfs(i, j, grid, vis, n, m, rotten);
+                    }
+                }
+            }
+
+            if(currRot == rotten) return -1;
+            else ans++;
+
+        }
+        return ans;
+    }
+
+    void bfs(int r, int c, vector<vector<int>>& grid, vector<vector<int>>& vis, int n, int m,  int& rotten){
+
+        vis[r][c] = 1;
+
+        int dr[] = {1,0,-1,0};
+        int dc[] = {0,1,0,-1};
+
+        for(int i=0; i<4; i++){
+            int nr = r + dr[i];
+            int nc = c + dc[i];
+
+            if(nr>=0 && nr<n && nc>=0 && nc<m && grid[nr][nc] == 1){
+                vis[nr][nc] = 1;
+                grid[nr][nc] = 2;
+                rotten++;
+            }
+        }
+
+    }
+
+//8 Stock span problem
+
+    int next(int price) {
+        int res = 1;
+        while (!s.empty() && s.top().first <= price) {
+            res += s.top().second;
+            s.pop();
+        }
+        s.push({price, res});
+        return res;
+    }
+
+//9 Maximum of minimum for every window size
+
+    vector <int> maxOfMin(int arr[], int n){
+        if(n == 0) return {};
+        stack<int> st;
+        vector<int> left(n+1, -1), right(n+1, n), res(n+1, 0);
+
+        for(int i=0; i<n; ++i) {
+            while(!st.empty() && arr[st.top()] >= arr[i]) st.pop();
+            if(!st.empty()) left[i] = st.top();
+            st.push(i);
+        }
+        
+        while(!st.empty()) st.pop();
+            
+        for(int i=n-1; i>=0; --i) {
+            while(!st.empty() && arr[st.top()] >= arr[i]) st.pop();
+            if(!st.empty()) right[i] = st.top();
+            st.push(i);
+        }
+        
+        for(int i=0; i<n; ++i) {
+            int interval = right[i] - left[i] - 1;
+            res[interval] = max(res[interval], arr[i]);
+        }
+        
+        for(int i=n-1; i>=1; --i) res[i] = max(res[i], res[i+1]);
+            
+        res.erase(res.begin());
+        return res;
+    }
+
+//10 Celebrity problem
+
+    int celebrity(vector<vector<int> >& M, int n){
+        int know[n]={0}, knownBy[n]={0};
+        for(int i=0; i<M.size(); i++){
+            for(int j=0; j<M[0].size(); j++){
+                if(M[i][j]){
+                    know[i]++;
+                    knownBy[j]++;
+                }
+            }
+        }
+        
+        for(int i=0; i<n; i++){
+            if(knownBy[i] - know[i] == n-1) return i;
+        }
+        return -1;
+    }
